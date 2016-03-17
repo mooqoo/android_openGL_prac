@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.wangalbert.hellotriangle.Renderer.SampleRenderer;
+import com.example.wangalbert.hellotriangle.Renderer.SquareRenderer;
 import com.example.wangalbert.hellotriangle.Renderer.TriangleRenderer;
 
 public class MainActivity extends AppCompatActivity {
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
 
     mGLSurfaceView = new GLSurfaceView(this);
+    //mGLSurfaceView.setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
 
     // Check if the system supports OpenGL ES 2.0.
     final ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
@@ -36,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
       mGLSurfaceView.setEGLContextClientVersion(2);
 
       // Set the renderer to our demo renderer, defined below.
-      mGLSurfaceView.setRenderer(new TriangleRenderer());
+      mGLSurfaceView.setRenderer(new SquareRenderer());
     }
     else
     {

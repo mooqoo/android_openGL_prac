@@ -5,6 +5,7 @@ import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
 import android.os.SystemClock;
 
+import com.example.wangalbert.hellotriangle.Shape.Square;
 import com.example.wangalbert.hellotriangle.Shape.Triangle;
 
 import javax.microedition.khronos.egl.EGLConfig;
@@ -16,7 +17,7 @@ import javax.microedition.khronos.opengles.GL10;
  * Created by wangalbert on 3/17/16.
  * Copyright (c) 2016 MobiusBobs Inc. All rights reserved.
  */
-public class TriangleRenderer implements GLSurfaceView.Renderer {
+public class SquareRenderer implements GLSurfaceView.Renderer {
   public static final String TAG = "Renderer";
 
   // mMVPMatrix is an abbreviation for "Model View Projection Matrix"
@@ -26,10 +27,10 @@ public class TriangleRenderer implements GLSurfaceView.Renderer {
   private float[] mRotationMatrix = new float[16];
 
   // shape
-  private Triangle mTriangle;
+  private Square mSquare;
 
   // Constructor
-  public TriangleRenderer() {
+  public SquareRenderer() {
 
   }
 
@@ -38,7 +39,7 @@ public class TriangleRenderer implements GLSurfaceView.Renderer {
     // Set the background clear color to gray.
     GLES20.glClearColor(0.5f, 0.5f, 0.5f, 0.5f);
 
-    mTriangle = new Triangle();
+    mSquare = new Square();
   }
 
   @Override
@@ -74,6 +75,6 @@ public class TriangleRenderer implements GLSurfaceView.Renderer {
     // for the matrix multiplication product to be correct.
     Matrix.multiplyMM(scratch, 0, mMVPMatrix, 0, mRotationMatrix, 0);
 
-    mTriangle.draw(scratch);
+    mSquare.draw(scratch);
   }
 }
