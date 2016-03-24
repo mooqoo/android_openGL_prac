@@ -49,7 +49,11 @@ public class TriangleRenderer implements GLSurfaceView.Renderer {
 
     // this projection matrix is applied to object coordinates
     // in the onDrawFrame() method
-    Matrix.frustumM(mProjectionMatrix, 0, -ratio, ratio, -1, 1, 3, 7);
+
+    // this is orthographic projection
+    Matrix.orthoM(mProjectionMatrix, 0, -1, 1, -1, 1, -1, 1);
+    // this is perspective projection
+    //Matrix.frustumM(mProjectionMatrix, 0, -ratio, ratio, -1, 1, 3, 7);
   }
 
   @Override
@@ -59,12 +63,15 @@ public class TriangleRenderer implements GLSurfaceView.Renderer {
     GLES20.glClear(GLES20.GL_DEPTH_BUFFER_BIT | GLES20.GL_COLOR_BUFFER_BIT);
 
     // Create a rotation transformation for the triangle
-    long time = SystemClock.uptimeMillis() % 4000L;
-    float angle = 0.090f * ((int) time);
-    Matrix.setRotateM(mRotationMatrix, 0, angle, 0, 0, -1.0f);
+    //long time = SystemClock.uptimeMillis() % 4000L;
+    //float angle = 0.090f * ((int) time);
+    //Matrix.setRotateM(mRotationMatrix, 0, angle, 0, 0, -1.0f);
 
     // Set the camera position (View matrix)
-    Matrix.setLookAtM(mViewMatrix, 0, 0, 0, -3, 0f, 0f, 0f, 0f, 1.0f, 0.0f);
+    // set the camer position at (0,0,-3),
+    // looking at (0,0,0)
+    // with up vector (0,1,0)
+    Matrix.setLookAtM(mViewMatrix, 0, 0, 0, 1.0f, 0f, 0f, 0f, 0f, 1.0f, 0.0f);
 
     // Calculate the projection and view transformation
     Matrix.multiplyMM(mMVPMatrix, 0, mProjectionMatrix, 0, mViewMatrix, 0);
@@ -72,8 +79,8 @@ public class TriangleRenderer implements GLSurfaceView.Renderer {
     // Combine the rotation matrix with the projection and camera view
     // Note that the mMVPMatrix factor *must be first* in order
     // for the matrix multiplication product to be correct.
-    Matrix.multiplyMM(scratch, 0, mMVPMatrix, 0, mRotationMatrix, 0);
+    //Matrix.multiplyMM(scratch, 0, mMVPMatrix, 0, mRotationMatrix, 0);
 
-    mTriangle.draw(scratch);
+    mTriangle.draw(mMVPMatrix);
   }
 }

@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
       mGLSurfaceView.setEGLContextClientVersion(2);
 
       // Set the renderer to our demo renderer, defined below.
-      mGLSurfaceView.setRenderer(new SquareRenderer());
+      mGLSurfaceView.setRenderer(new TriangleRenderer());
     }
     else
     {
